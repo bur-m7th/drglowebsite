@@ -1,0 +1,4 @@
+# local tooling leftovers
+node_modules/
+_site/
+*lighthouse.*/
