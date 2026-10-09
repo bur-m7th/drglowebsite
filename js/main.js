@@ -5,6 +5,9 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Hover effects only on real mice: on touch screens a hover that changes the page
+     makes iOS/Android swallow the first tap, so users have to tap twice. */
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   /* Each language is its own page (/ and /ar/), so the language comes from the document. */
   const lang = document.documentElement.lang === "ar" ? "ar" : "en";
   const L = (obj) => (obj && (obj[lang] ?? obj.en)) || "";
@@ -183,7 +186,7 @@
   benefits.forEach((b, i) => {
     const act = () => { bTouched = true; clearInterval(bTimer); setBenefit(i); };
     b.addEventListener("click", act);
-    b.addEventListener("mouseenter", act);
+    if (canHover) b.addEventListener("mouseenter", act);
     b.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
   });
   new IntersectionObserver(([e]) => {
@@ -503,8 +506,8 @@
     tip.style.top = c.top - card.top + "px";
     tip.hidden = false;
   }
-  svg.addEventListener("pointerover", (e) => { const g = e.target.closest(".pin"); if (g) showTip(g); });
-  svg.addEventListener("pointerout", (e) => { if (e.target.closest(".pin") && !e.relatedTarget?.closest?.(".pin")) tip.hidden = true; });
+  svg.addEventListener("pointerover", (e) => { if (e.pointerType !== "mouse") return; const g = e.target.closest(".pin"); if (g) showTip(g); });
+  svg.addEventListener("pointerout", (e) => { if (e.pointerType === "mouse" && e.target.closest(".pin") && !e.relatedTarget?.closest?.(".pin")) tip.hidden = true; });
   svg.addEventListener("focusin", (e) => { const g = e.target.closest(".pin"); if (g) showTip(g); });
   svg.addEventListener("focusout", () => { tip.hidden = true; });
   svg.addEventListener("click", (e) => {
