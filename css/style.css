@@ -412,6 +412,7 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
 @keyframes route { from { stroke-dashoffset: 400; opacity: 0; } to { stroke-dashoffset: 0; opacity: .75; } }
 @keyframes dash { to { stroke-dashoffset: -26; } }
 .map .pin { cursor: pointer; }
+.map .pin .hit { fill: transparent; stroke: none; } /* finger-sized tap area around the small dot */
 .map .pin circle.core { transition: r .25s; }
 .map .pin:focus circle.core { r: 11; }
 @media (hover: hover) and (pointer: fine) { .map .pin:hover circle.core { r: 11; } }
@@ -486,6 +487,52 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
 .buy__card p { color: #d4e1ff; font-size: 1.08rem; max-width: 520px; }
 .buy__ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 12px; }
 .buy__img { width: 100%; max-width: 360px; justify-self: center; border-radius: 28px; transform: rotate(6deg); box-shadow: 0 40px 80px -30px rgba(0,0,0,.6); animation: floaty 6s ease-in-out infinite; }
+
+/* ---------- For retailers ---------- */
+.retail { padding-top: 0; }
+.retail__card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: start;
+  background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-sm);
+}
+.retail__copy { min-width: 0; }
+.retail__sub { color: var(--muted); font-size: 1.08rem; }
+.retail__perks { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 12px; }
+.retail__perks li { display: flex; gap: 12px; align-items: center; font-weight: 600; color: var(--navy-900); }
+.retail__perks svg { width: 40px; height: 40px; padding: 9px; flex: none; border-radius: 12px; background: var(--gold-soft); color: var(--gold-text); }
+.retail__direct { font-weight: 700; color: var(--ink); margin-bottom: 12px; }
+.retail__wa { display: flex; flex-wrap: wrap; gap: 12px; }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 16px; text-decoration: none;
+  background: #e8f8ee; border: 1px solid #bfe8cf; color: #0d5a32; transition: transform .3s var(--ease), box-shadow .3s;
+}
+@media (hover: hover) and (pointer: fine) { .wa-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); } }
+.wa-btn b { display: block; font-size: .95rem; }
+.wa-btn small { display: block; font-size: .82rem; color: #2f7a52; }
+
+.rform { background: var(--ice); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(20px, 3vw, 32px); display: grid; gap: 16px; min-width: 0; }
+.rform__country { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rform__country legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: .92rem; color: var(--navy-900); }
+.seg { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1.5px solid var(--line); font-weight: 600; cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg:has(input:checked) { border-color: var(--royal); box-shadow: 0 0 0 3px rgba(23, 64, 196, .12); color: var(--navy); }
+.seg:has(input:focus-visible) { outline: 3px solid var(--blue); outline-offset: 2px; }
+.field { display: grid; gap: 6px; font-weight: 700; font-size: .92rem; color: var(--navy-900); min-width: 0; }
+.field small { font-weight: 500; color: var(--muted); }
+.field input, .field select, .field textarea {
+  width: 100%; font: inherit; font-weight: 400; font-size: 1rem; color: var(--ink); background: #fff;
+  border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; transition: border-color .2s, box-shadow .2s;
+}
+.field textarea { resize: vertical; min-height: 84px; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--royal); box-shadow: 0 0 0 3px rgba(23, 64, 196, .15); }
+.field [aria-invalid="true"] { border-color: var(--bad); }
+.rform__row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rform__err { margin: 0; color: var(--bad); font-weight: 600; font-size: .92rem; }
+.rform__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; }
+.btn--wa { background: #1fa855; color: #fff; box-shadow: 0 10px 24px -10px rgba(31, 168, 85, .7); }
+@media (hover: hover) and (pointer: fine) { .btn--wa:hover { background: #18934a; } }
+.btn--wa svg { width: 20px; height: 20px; }
+.rform__alt { background: none; border: 0; padding: 6px 0; color: var(--royal); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.rform__note { margin: 0; font-size: .85rem; color: var(--muted); }
 
 /* ---------- Contact ---------- */
 .contact { padding-top: 40px; }
@@ -570,6 +617,19 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.is-in { opacity: 1; transform: none; }
 
+/* ---------- Touch screens ---------- */
+/* no double-tap-to-zoom wait on anything tappable */
+a, button, summary, label, input, select, textarea, [tabindex], .card, .benefit { touch-action: manipulation; }
+@media (hover: none), (pointer: coarse) {
+  /* hover effects are mouse-only, so give taps their own instant feedback */
+  .btn, .chip, .answer, .wa-btn, .seg, .card, .benefit, .map-tab, .socials a { transition-duration: .12s; }
+  .btn:active, .chip:active, .answer:active, .wa-btn:active, .seg:active, .map-tab:active, .socials a:active { transform: scale(.96); }
+  .card:active { transform: scale(.98); }
+  .benefit:active { background: #fff; }
+  /* taller hit areas for small text links, without moving the layout */
+  .office li a, .faq__item p a, .rform__alt { padding-block: 10px; margin-block: -10px; }
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px) {
   .nav__links { position: fixed; inset: var(--nav-h) 16px auto; flex-direction: column; background: #fff; border-radius: 22px; padding: 12px; box-shadow: var(--shadow);
@@ -604,6 +664,7 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
   .buy__ctas { justify-content: center; }
   .buy__img { max-width: 240px; }
   .offices { grid-template-columns: 1fr; }
+  .retail__card { grid-template-columns: 1fr; }
   .modal__dialog { grid-template-columns: 1fr; }
   .modal__media img { max-height: 46svh; }
   .timeline { grid-template-columns: 1fr 1fr; row-gap: 36px; }
@@ -621,6 +682,9 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
   .nav .btn--glow { display: none; }
   .nav__logo img { height: 44px; }
   .quiz__answers { grid-template-columns: 1fr; }
+  .rform__row { grid-template-columns: 1fr; }
+  .rform__actions .btn { width: 100%; }
+  .retail__wa .wa-btn { flex: 1 1 100%; }
   .grid { grid-template-columns: 1fr 1fr; gap: 14px; }
   .card__body { padding: 12px 14px 16px; }
   .card__name { font-size: .98rem; }

@@ -104,6 +104,28 @@
             "English",
             "Arabic"
           ]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+973-3364-0300",
+          "email": "dr.glo.bahrain@gmail.com",
+          "areaServed": "BH",
+          "availableLanguage": [
+            "English",
+            "Arabic"
+          ]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+966-56-686-1555",
+          "email": "dr.glo.ksa@gmail.com",
+          "areaServed": "SA",
+          "availableLanguage": [
+            "English",
+            "Arabic"
+          ]
         }
       ],
       "sameAs": [
@@ -165,6 +187,7 @@
         <a href="#products" data-i18n="nav.products">المنتجات</a>
         <a href="#quiz" data-i18n="nav.quiz">اختر منتجك</a>
         <a href="#story" data-i18n="nav.story">قصتنا</a>
+        <a href="#retailers" data-i18n="nav.retail">للتجار</a>
         <a href="#contact" data-i18n="nav.contact">تواصل معنا</a>
       </nav>
       <div class="nav__actions">
@@ -623,10 +646,60 @@
             <p data-i18n="buy.sub">منتجات د. قلو متوفرة لدى شركائنا في البحرين والسعودية، وعبر متجرنا الإلكتروني مع التوصيل خلال يومين في البحرين.</p>
             <div class="buy__ctas">
               <a class="btn btn--light" href="https://www.drgloshop.com" target="_blank" rel="noopener" data-i18n="buy.cta1">تسوق أونلاين — drgloshop.com</a>
-              <a class="btn btn--ghost" href="#contact" data-i18n="buy.cta2">كن شريك تجزئة</a>
+              <a class="btn btn--ghost" href="#retailers" data-i18n="buy.cta2">كن شريك تجزئة</a>
             </div>
           </div>
           <img class="buy__img" src="../assets/img/products/white-magic-sm.webp" alt="أوراق وايت ماجيك للغسيل من د. قلو" loading="lazy" width="560" height="560">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOR RETAILERS ============ -->
+    <section class="section retail" id="retailers" aria-labelledby="retailTitle">
+      <div class="container">
+        <div class="retail__card reveal">
+          <div class="retail__copy">
+            <p class="eyebrow" data-i18n="rf.eyebrow">للتجار</p>
+            <h2 id="retailTitle" data-i18n="rf.title">وفّر د. قلو في متجرك.</h2>
+            <p class="retail__sub" data-i18n="rf.sub">سوبرماركت، صيدلية أو محل — أخبرنا قليلاً عن متجرك وسنعود إليك بالأسعار والخطوات التالية.</p>
+            <ul class="retail__perks">
+              <li><svg viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Zm0 0v8l-9 5m0-8v8m-9-13v8l9 5"/></svg><span data-i18n="rf.p1">مخزون جاهز يُبقي رفوفك ممتلئة</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span data-i18n="rf.p2">توصيل في جميع أنحاء البحرين وكل مناطق السعودية</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2m16 1a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2m-2 3a4 4 0 0 1-4 4h-2"/></svg><span data-i18n="rf.p3">شخص حقيقي تتحدث معه، بالعربية أو الإنجليزية</span></li>
+            </ul>
+            <p class="retail__direct" data-i18n="rf.direct">تفضّل مراسلتنا مباشرة؟</p>
+            <div class="retail__wa">
+              <a class="wa-btn" href="https://wa.me/97333640300" target="_blank" rel="noopener"><span class="flag flag--bh"></span><span><b data-i18n="rf.wa.bh">واتساب البحرين</b><small dir="ltr">+973 3364 0300</small></span></a>
+              <a class="wa-btn" href="https://wa.me/966566861555" target="_blank" rel="noopener"><span class="flag flag--sa"></span><span><b data-i18n="rf.wa.sa">واتساب السعودية</b><small dir="ltr">+966 56 686 1555</small></span></a>
+            </div>
+          </div>
+
+          <form class="rform" id="retailForm" novalidate>
+            <fieldset class="rform__country">
+              <legend data-i18n="rf.country">أين يقع متجرك؟</legend>
+              <label class="seg"><input type="radio" name="country" value="bh" checked><span class="flag flag--bh"></span><span data-i18n="rf.bh">البحرين</span></label>
+              <label class="seg"><input type="radio" name="country" value="sa"><span class="flag flag--sa"></span><span data-i18n="rf.sa">السعودية</span></label>
+            </fieldset>
+            <label class="field"><span data-i18n="rf.store">اسم المتجر أو الشركة</span><input id="rfStore" name="store" type="text" autocomplete="organization" required></label>
+            <label class="field"><span data-i18n="rf.name">اسمك</span><input id="rfName" name="name" type="text" autocomplete="name" required></label>
+            <div class="rform__row">
+              <label class="field"><span data-i18n="rf.city">المدينة</span><input name="city" type="text" autocomplete="address-level2"></label>
+              <label class="field"><span data-i18n="rf.branches">عدد الفروع</span>
+                <select name="branches">
+                  <option value="1" data-i18n="rf.b1">فرع واحد</option>
+                  <option value="2-5" data-i18n="rf.b2">٢–٥ فروع</option>
+                  <option value="6+" data-i18n="rf.b3">٦ فروع أو أكثر</option>
+                </select>
+              </label>
+            </div>
+            <label class="field"><span><span data-i18n="rf.msg">هل هناك شيء آخر؟</span> <small data-i18n="rf.opt">(اختياري)</small></span><textarea name="message" rows="3"></textarea></label>
+            <p class="rform__err" id="rfErr" role="alert" hidden data-i18n="rf.err">يرجى إضافة اسم المتجر واسمك.</p>
+            <div class="rform__actions">
+              <button class="btn btn--wa" type="submit" value="wa"><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><span data-i18n="rf.send">أرسل عبر واتساب</span></button>
+              <button class="rform__alt" type="submit" value="email" data-i18n="rf.email">أو أرسل عبر البريد الإلكتروني</button>
+            </div>
+            <p class="rform__note" data-i18n="rf.note">يفتح واتساب أو تطبيق البريد مع تعبئة بياناتك — فقط اضغط إرسال.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -665,7 +738,7 @@
           </details>
           <details class="faq__item">
             <summary data-i18n="faq.q7">كيف يمكن لمتجري توفير منتجات د. قلو؟</summary>
-            <p data-i18n="faq.a7">يسعدنا التعاون معك. راسلنا على <a href="mailto:dr.glo.bahrain@gmail.com">dr.glo.bahrain@gmail.com</a> للبحرين أو <a href="mailto:dr.glo.ksa@gmail.com">dr.glo.ksa@gmail.com</a> للسعودية.</p>
+            <p data-i18n="faq.a7">يسعدنا التعاون معك. املأ <a href="#retailers">نموذج التجار</a> وسيصل مباشرة إلى فريقنا عبر واتساب، أو راسلنا مباشرة على <a href="https://wa.me/97333640300" target="_blank" rel="noopener">واتساب البحرين</a> أو <a href="https://wa.me/966566861555" target="_blank" rel="noopener">واتساب السعودية</a>.</p>
           </details>
         </div>
       </div>
@@ -684,6 +757,7 @@
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="ct.bh.a">السيف – مجمع ٤٢٨ – طريق ٢٨٣١، مبنى ٢٤٤٦، مملكة البحرين</span></li>
               <li><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg><a href="tel:+97333640300" dir="ltr">+973 3364 0300</a></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><a href="https://wa.me/97333640300" target="_blank" rel="noopener" data-i18n="ct.wa">تواصل عبر واتساب</a></li>
               <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:dr.glo.bahrain@gmail.com">dr.glo.bahrain@gmail.com</a></li>
             </ul>
           </article>
@@ -692,6 +766,7 @@
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="ct.sa.a">القطيف – حي الشاطئ، الرياض ٣٢، المملكة العربية السعودية</span></li>
               <li><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg><a href="tel:+966566861555" dir="ltr">+966 56 686 1555</a></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><a href="https://wa.me/966566861555" target="_blank" rel="noopener" data-i18n="ct.wa">تواصل عبر واتساب</a></li>
               <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:dr.glo.ksa@gmail.com">dr.glo.ksa@gmail.com</a></li>
             </ul>
           </article>

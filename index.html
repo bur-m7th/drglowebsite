@@ -104,6 +104,28 @@
             "English",
             "Arabic"
           ]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+973-3364-0300",
+          "email": "dr.glo.bahrain@gmail.com",
+          "areaServed": "BH",
+          "availableLanguage": [
+            "English",
+            "Arabic"
+          ]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+966-56-686-1555",
+          "email": "dr.glo.ksa@gmail.com",
+          "areaServed": "SA",
+          "availableLanguage": [
+            "English",
+            "Arabic"
+          ]
         }
       ],
       "sameAs": [
@@ -165,6 +187,7 @@
         <a href="#products" data-i18n="nav.products">Products</a>
         <a href="#quiz" data-i18n="nav.quiz">Find Yours</a>
         <a href="#story" data-i18n="nav.story">Our Story</a>
+        <a href="#retailers" data-i18n="nav.retail">For Retailers</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="nav__actions">
@@ -623,10 +646,60 @@
             <p data-i18n="buy.sub">dr.glo is available at our retail partners across Bahrain and Saudi Arabia, and online with delivery within 2 days in Bahrain.</p>
             <div class="buy__ctas">
               <a class="btn btn--light" href="https://www.drgloshop.com" target="_blank" rel="noopener" data-i18n="buy.cta1">Shop online — drgloshop.com</a>
-              <a class="btn btn--ghost" href="#contact" data-i18n="buy.cta2">Become a retail partner</a>
+              <a class="btn btn--ghost" href="#retailers" data-i18n="buy.cta2">Become a retail partner</a>
             </div>
           </div>
           <img class="buy__img" src="assets/img/products/white-magic-sm.webp" alt="dr.glo White Magic laundry sheets" loading="lazy" width="560" height="560">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOR RETAILERS ============ -->
+    <section class="section retail" id="retailers" aria-labelledby="retailTitle">
+      <div class="container">
+        <div class="retail__card reveal">
+          <div class="retail__copy">
+            <p class="eyebrow" data-i18n="rf.eyebrow">For retailers</p>
+            <h2 id="retailTitle" data-i18n="rf.title">Stock dr.glo in your store.</h2>
+            <p class="retail__sub" data-i18n="rf.sub">Supermarkets, pharmacies and shops — tell us a little about your store and we'll get back to you with prices and next steps.</p>
+            <ul class="retail__perks">
+              <li><svg viewBox="0 0 24 24"><path d="m21 8-9-5-9 5 9 5 9-5Zm0 0v8l-9 5m0-8v8m-9-13v8l9 5"/></svg><span data-i18n="rf.p1">Ready stock to keep your shelves full</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><span data-i18n="rf.p2">Delivery across Bahrain and every Saudi region</span></li>
+              <li><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2M4 14a2 2 0 0 0 2 2h1v-5H6a2 2 0 0 0-2 2m16 1a2 2 0 0 1-2 2h-1v-5h1a2 2 0 0 1 2 2m-2 3a4 4 0 0 1-4 4h-2"/></svg><span data-i18n="rf.p3">A real person to talk to, in Arabic or English</span></li>
+            </ul>
+            <p class="retail__direct" data-i18n="rf.direct">Prefer to message us directly?</p>
+            <div class="retail__wa">
+              <a class="wa-btn" href="https://wa.me/97333640300" target="_blank" rel="noopener"><span class="flag flag--bh"></span><span><b data-i18n="rf.wa.bh">WhatsApp Bahrain</b><small dir="ltr">+973 3364 0300</small></span></a>
+              <a class="wa-btn" href="https://wa.me/966566861555" target="_blank" rel="noopener"><span class="flag flag--sa"></span><span><b data-i18n="rf.wa.sa">WhatsApp Saudi Arabia</b><small dir="ltr">+966 56 686 1555</small></span></a>
+            </div>
+          </div>
+
+          <form class="rform" id="retailForm" novalidate>
+            <fieldset class="rform__country">
+              <legend data-i18n="rf.country">Where is your store?</legend>
+              <label class="seg"><input type="radio" name="country" value="bh" checked><span class="flag flag--bh"></span><span data-i18n="rf.bh">Bahrain</span></label>
+              <label class="seg"><input type="radio" name="country" value="sa"><span class="flag flag--sa"></span><span data-i18n="rf.sa">Saudi Arabia</span></label>
+            </fieldset>
+            <label class="field"><span data-i18n="rf.store">Store or company name</span><input id="rfStore" name="store" type="text" autocomplete="organization" required></label>
+            <label class="field"><span data-i18n="rf.name">Your name</span><input id="rfName" name="name" type="text" autocomplete="name" required></label>
+            <div class="rform__row">
+              <label class="field"><span data-i18n="rf.city">City</span><input name="city" type="text" autocomplete="address-level2"></label>
+              <label class="field"><span data-i18n="rf.branches">Branches</span>
+                <select name="branches">
+                  <option value="1" data-i18n="rf.b1">1 branch</option>
+                  <option value="2-5" data-i18n="rf.b2">2–5 branches</option>
+                  <option value="6+" data-i18n="rf.b3">6 or more</option>
+                </select>
+              </label>
+            </div>
+            <label class="field"><span><span data-i18n="rf.msg">Anything else?</span> <small data-i18n="rf.opt">(optional)</small></span><textarea name="message" rows="3"></textarea></label>
+            <p class="rform__err" id="rfErr" role="alert" hidden data-i18n="rf.err">Please add your store name and your name.</p>
+            <div class="rform__actions">
+              <button class="btn btn--wa" type="submit" value="wa"><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><span data-i18n="rf.send">Send on WhatsApp</span></button>
+              <button class="rform__alt" type="submit" value="email" data-i18n="rf.email">or send by email</button>
+            </div>
+            <p class="rform__note" data-i18n="rf.note">Opens WhatsApp or your email app with your details filled in — just press send.</p>
+          </form>
         </div>
       </div>
     </section>
@@ -665,7 +738,7 @@
           </details>
           <details class="faq__item">
             <summary data-i18n="faq.q7">How can my store stock dr.glo?</summary>
-            <p data-i18n="faq.a7">We'd love to partner with you. Email <a href="mailto:dr.glo.bahrain@gmail.com">dr.glo.bahrain@gmail.com</a> for Bahrain or <a href="mailto:dr.glo.ksa@gmail.com">dr.glo.ksa@gmail.com</a> for Saudi Arabia.</p>
+            <p data-i18n="faq.a7">We'd love to partner with you. Fill in the <a href="#retailers">retailer form</a> and it goes straight to our team on WhatsApp, or message us directly on <a href="https://wa.me/97333640300" target="_blank" rel="noopener">WhatsApp Bahrain</a> or <a href="https://wa.me/966566861555" target="_blank" rel="noopener">WhatsApp Saudi Arabia</a>.</p>
           </details>
         </div>
       </div>
@@ -684,6 +757,7 @@
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="ct.bh.a">Al Seef – Block 428 – Road 2831, Building 2446, Kingdom of Bahrain</span></li>
               <li><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg><a href="tel:+97333640300" dir="ltr">+973 3364 0300</a></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><a href="https://wa.me/97333640300" target="_blank" rel="noopener" data-i18n="ct.wa">Chat on WhatsApp</a></li>
               <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:dr.glo.bahrain@gmail.com">dr.glo.bahrain@gmail.com</a></li>
             </ul>
           </article>
@@ -692,6 +766,7 @@
             <ul>
               <li><svg viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="ct.sa.a">Al Qatif – Al Shati District, Riyadh 32, Kingdom of Saudi Arabia</span></li>
               <li><svg viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg><a href="tel:+966566861555" dir="ltr">+966 56 686 1555</a></li>
+              <li><svg viewBox="0 0 24 24"><path d="M3.5 20.5 4.8 16A8.5 8.5 0 1 1 8 19.2Z"/><path d="M9 8.6c0 3.5 2.9 6.4 6.4 6.4l1-1.7-2-1-1 1c-1.2-.5-2.2-1.5-2.7-2.7l1-1-1-2Z"/></svg><a href="https://wa.me/966566861555" target="_blank" rel="noopener" data-i18n="ct.wa">Chat on WhatsApp</a></li>
               <li><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><a href="mailto:dr.glo.ksa@gmail.com">dr.glo.ksa@gmail.com</a></li>
             </ul>
           </article>

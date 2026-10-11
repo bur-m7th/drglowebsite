@@ -47,6 +47,25 @@
     if (e.target.closest("a")) { links.classList.remove("is-open"); burger.setAttribute("aria-expanded", "false"); }
   });
 
+  /* ---------------- In-page links ----------------
+     A smooth scroll down this long page takes 2–3 s on a phone, and a tap during it only
+     stops the scroll, so people end up tapping twice. Jump most of the way instantly,
+     then glide the last screen. */
+  addEventListener("click", (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    const hash = a.getAttribute("href"), target = hash.length > 1 && document.getElementById(hash.slice(1));
+    if (!target) return;
+    e.preventDefault();
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const y = target.getBoundingClientRect().top + scrollY - pad;
+    if (!reduceMotion && Math.abs(y - scrollY) > innerHeight * 1.5) scrollTo({ top: y - Math.sign(y - scrollY) * innerHeight * 0.8, behavior: "instant" });
+    scrollTo({ top: y, behavior: reduceMotion ? "instant" : "smooth" });
+    history.pushState(null, "", hash);
+  });
+  /* iOS only shows :active (our tap feedback) when the page listens for touches */
+  addEventListener("touchstart", () => {}, { passive: true });
+
   /* ---------------- Reveal on scroll ---------------- */
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); revealObs.unobserve(e.target); } });
@@ -443,6 +462,7 @@
     const name = lang === "ar" ? m.ar : m.en;
     return `<g class="pin ${cls}" tabindex="0" data-id="${m.id}" ${extra}>
       ${m.status !== "next" ? `<circle class="pulse" cx="${x}" cy="${y}" r="10"/>` : ""}
+      <circle class="hit" cx="${x}" cy="${y}" r="30"/>
       <circle class="core" cx="${x}" cy="${y}" r="8"/>
       <text class="halo" x="${tx}" y="${ty}" text-anchor="${anchor}">${name}</text>
       <text x="${tx}" y="${ty}" text-anchor="${anchor}">${name}</text>
@@ -533,6 +553,43 @@
   new IntersectionObserver(([e], o) => {
     if (e.isIntersecting || e.boundingClientRect.top < 0) { o.disconnect(); runCounters($(".panel.is-active")); }
   }, { threshold: 0, rootMargin: "0px 0px -15% 0px" }).observe($(".story__panels"));
+
+  /* ---------------- Retailer form ----------------
+     No backend: the form writes a ready-to-send message and opens WhatsApp (or the
+     email app) addressed to the office of the chosen country. */
+  const OFFICES = {
+    bh: { wa: "97333640300", email: "dr.glo.bahrain@gmail.com" },
+    sa: { wa: "966566861555", email: "dr.glo.ksa@gmail.com" }
+  };
+  const rform = $("#retailForm"), rErr = $("#rfErr");
+  rform.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = rform.elements;
+    const missing = [f.store, f.name].filter((el) => !el.value.trim());
+    [f.store, f.name].forEach((el) => el.setAttribute("aria-invalid", missing.includes(el)));
+    rErr.hidden = !missing.length;
+    if (missing.length) { missing[0].focus(); return; }
+
+    const office = OFFICES[f.country.value];
+    const lines = [
+      t("rf.hi"), "",
+      `${t("rf.store")}: ${f.store.value.trim()}`,
+      `${t("rf.name")}: ${f.name.value.trim()}`,
+      `${t("rf.country.k")}: ${t(f.country.value === "sa" ? "rf.sa" : "rf.bh")}`,
+      f.city.value.trim() ? `${t("rf.city")}: ${f.city.value.trim()}` : null,
+      `${t("rf.branches")}: ${f.branches.selectedOptions[0].textContent}`,
+      f.message.value.trim() ? `\n${f.message.value.trim()}` : null
+    ];
+    const text = lines.filter((l) => l !== null).join("\n");
+    if (e.submitter?.value === "email") {
+      location.href = `mailto:${office.email}?subject=${encodeURIComponent(t("rf.subject"))}&body=${encodeURIComponent(text)}`;
+    } else {
+      window.open(`https://wa.me/${office.wa}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+    }
+  });
+  rform.addEventListener("input", (e) => {
+    if (e.target.getAttribute("aria-invalid") === "true" && e.target.value.trim()) e.target.setAttribute("aria-invalid", "false");
+  });
 
   /* ---------------- Init ---------------- */
   $("#year").textContent = new Date().getFullYear();

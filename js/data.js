@@ -392,7 +392,7 @@ const AR = {
   "faq.q6": "هل الأوراق مناسبة للسفر؟",
   "faq.a6": "جداً. أوراق د. قلو خفيفة وصغيرة ولا تنسكب، لذا يمكنك أخذ بعضها معك في أي رحلة.",
   "faq.q7": "كيف يمكن لمتجري توفير منتجات د. قلو؟",
-  "faq.a7": "يسعدنا التعاون معك. راسلنا على <a href=\"mailto:dr.glo.bahrain@gmail.com\">dr.glo.bahrain@gmail.com</a> للبحرين أو <a href=\"mailto:dr.glo.ksa@gmail.com\">dr.glo.ksa@gmail.com</a> للسعودية.",
+  "faq.a7": "يسعدنا التعاون معك. املأ <a href=\"#retailers\">نموذج التجار</a> وسيصل مباشرة إلى فريقنا عبر واتساب، أو راسلنا مباشرة على <a href=\"https://wa.me/97333640300\" target=\"_blank\" rel=\"noopener\">واتساب البحرين</a> أو <a href=\"https://wa.me/966566861555\" target=\"_blank\" rel=\"noopener\">واتساب السعودية</a>.",
   "ct.eyebrow": "تواصل معنا", "ct.title": "يسعدنا أن نسمع منك.",
   "ct.bh.t": "مكتب البحرين", "ct.bh.k": "من هنا بدأت رحلتنا",
   "ct.bh.a": "السيف – مجمع ٤٢٨ – طريق ٢٨٣١، مبنى ٢٤٤٦، مملكة البحرين",
@@ -401,11 +401,29 @@ const AR = {
   "ct.fl.t": "تابعونا",
   "ft.script": "معاً .. لعالم أنظف لحياة أفضل", "ft.rights": "أوراق المنظفات. جميع الحقوق محفوظة.",
   "m.how": "طريقة الاستخدام", "m.cta": "متوفر على drgloshop.com",
-  "toast.pop": "أنت بطل الفقاعات!", "toast.pop.sub": "فرقعت ٢٥ فقاعة"
+  "toast.pop": "أنت بطل الفقاعات!", "toast.pop.sub": "فرقعت ٢٥ فقاعة",
+  "nav.retail": "للتجار",
+  "ct.wa": "تواصل عبر واتساب",
+  "rf.eyebrow": "للتجار", "rf.title": "وفّر د. قلو في متجرك.",
+  "rf.sub": "سوبرماركت، صيدلية أو محل — أخبرنا قليلاً عن متجرك وسنعود إليك بالأسعار والخطوات التالية.",
+  "rf.p1": "مخزون جاهز يُبقي رفوفك ممتلئة", "rf.p2": "توصيل في جميع أنحاء البحرين وكل مناطق السعودية",
+  "rf.p3": "شخص حقيقي تتحدث معه، بالعربية أو الإنجليزية",
+  "rf.direct": "تفضّل مراسلتنا مباشرة؟", "rf.wa.bh": "واتساب البحرين", "rf.wa.sa": "واتساب السعودية",
+  "rf.country": "أين يقع متجرك؟", "rf.bh": "البحرين", "rf.sa": "السعودية",
+  "rf.store": "اسم المتجر أو الشركة", "rf.name": "اسمك", "rf.city": "المدينة", "rf.branches": "عدد الفروع",
+  "rf.b1": "فرع واحد", "rf.b2": "٢–٥ فروع", "rf.b3": "٦ فروع أو أكثر",
+  "rf.msg": "هل هناك شيء آخر؟", "rf.opt": "(اختياري)",
+  "rf.err": "يرجى إضافة اسم المتجر واسمك.",
+  "rf.send": "أرسل عبر واتساب", "rf.email": "أو أرسل عبر البريد الإلكتروني",
+  "rf.note": "يفتح واتساب أو تطبيق البريد مع تعبئة بياناتك — فقط اضغط إرسال.",
+  "rf.hi": "مرحباً د. قلو، أرغب في توفير منتجاتكم في متجري.",
+  "rf.country.k": "الدولة", "rf.subject": "طلب شراكة تجزئة"
 };
 
 const EN_EXTRA = {
   "sheet.again": "Try it again", "sheet.done": "Fully dissolved. Clean clothes, zero residue.",
   "q.result": "Your perfect match", "q.restart": "Start over", "q.view": "View product", "q.back": "Back",
-  "toast.pop": "You're a Glo-getter!", "toast.pop.sub": "25 bubbles popped"
+  "toast.pop": "You're a Glo-getter!", "toast.pop.sub": "25 bubbles popped",
+  "rf.hi": "Hello dr.glo, I'd like to stock your products in my store.",
+  "rf.country.k": "Country", "rf.subject": "Retail partnership enquiry"
 };

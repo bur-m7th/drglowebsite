@@ -73,7 +73,9 @@ function jsonLd(lang) {
     ],
     contactPoint: [
       { "@type": "ContactPoint", contactType: "customer service", telephone: "+973-3364-0300", email: "dr.glo.bahrain@gmail.com", areaServed: "BH", availableLanguage: ["English", "Arabic"] },
-      { "@type": "ContactPoint", contactType: "customer service", telephone: "+966-56-686-1555", email: "dr.glo.ksa@gmail.com", areaServed: "SA", availableLanguage: ["English", "Arabic"] }
+      { "@type": "ContactPoint", contactType: "customer service", telephone: "+966-56-686-1555", email: "dr.glo.ksa@gmail.com", areaServed: "SA", availableLanguage: ["English", "Arabic"] },
+      { "@type": "ContactPoint", contactType: "sales", telephone: "+973-3364-0300", email: "dr.glo.bahrain@gmail.com", areaServed: "BH", availableLanguage: ["English", "Arabic"] },
+      { "@type": "ContactPoint", contactType: "sales", telephone: "+966-56-686-1555", email: "dr.glo.ksa@gmail.com", areaServed: "SA", availableLanguage: ["English", "Arabic"] }
     ],
     sameAs: [...SOCIAL, "https://www.drgloshop.com"]
   };
