@@ -244,7 +244,8 @@ html[dir="rtl"] .marquee__track { animation-name: marquee-rtl; }
 @keyframes rise { 0% { transform: translate(0,0) scale(.4); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(var(--x, 0), -200px) scale(1); opacity: 0; } }
 .dissolve__caption { margin: 14px 0 0; color: var(--muted); font-size: .95rem; min-height: 1.6em; }
 
-.benefits { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.benefits { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; align-content: start; }
+.benefits.is-measuring, .benefits.is-measuring * { transition: none !important; }
 .benefit {
   display: flex; gap: 18px; align-items: flex-start; padding: 18px 20px; border-radius: var(--radius); cursor: pointer;
   border: 1.5px solid transparent; transition: background .3s, border-color .3s, transform .3s var(--ease), box-shadow .3s;
@@ -510,7 +511,7 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
 .wa-btn small { display: block; font-size: .82rem; color: #2f7a52; }
 
 .rform { background: var(--ice); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(20px, 3vw, 32px); display: grid; gap: 16px; min-width: 0; }
-.rform__country { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rform__country { border: 0; padding: 0; margin: 0; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 .rform__country legend { padding: 0; margin-bottom: 8px; font-weight: 700; font-size: .92rem; color: var(--navy-900); }
 .seg { position: relative; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; background: #fff; border: 1.5px solid var(--line); font-weight: 600; cursor: pointer; transition: border-color .2s, box-shadow .2s; }
 .seg input { position: absolute; opacity: 0; pointer-events: none; }
@@ -679,7 +680,9 @@ a, button, summary, label, input, select, textarea, [tabindex], .card, .benefit 
   .map text.big { font-size: 40px; }
   .map .pin circle.core { r: 13; }
   .map-hint { display: block; }
-  .nav .btn--glow { display: none; }
+  .nav__inner { gap: 10px; }
+  .nav__actions { gap: 6px; }
+  .nav .btn--glow { padding: 9px 13px; font-size: .8rem; white-space: nowrap; }
   .nav__logo img { height: 44px; }
   .quiz__answers { grid-template-columns: 1fr; }
   .rform__row { grid-template-columns: 1fr; }
@@ -699,6 +702,15 @@ a, button, summary, label, input, select, textarea, [tabindex], .card, .benefit 
   .dissolve { padding: 22px 16px; }
   .dissolve__stage { height: 300px; }
   .timeline { grid-template-columns: 1fr; }
+}
+/* small phones: shrink the nav so logo, language, "Where to buy" and menu still fit on one row */
+@media (max-width: 380px) {
+  .nav__inner { width: calc(100% - 24px); gap: 6px; }
+  .rform__country { grid-template-columns: 1fr; }
+  .nav__actions { gap: 5px; }
+  .nav__logo img, .nav.is-scrolled .nav__logo img { height: 36px; }
+  .nav .lang-toggle { padding-inline: 10px; }
+  .nav .btn--glow { padding: 8px 11px; font-size: .76rem; }
 }
 /* short landscape phones */
 @media (max-height: 520px) and (orientation: landscape) {

@@ -185,7 +185,21 @@
   hero.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; });
   resize(); seed();
   if (reduceMotion) bubbles.forEach(drawBubble); else requestAnimationFrame(tick);
-  let rT; addEventListener("resize", () => { clearTimeout(rT); rT = setTimeout(() => { resize(); seed(); if (reduceMotion) bubbles.forEach(drawBubble); }, 150); });
+  /* Phones fire "resize" whenever the address bar slides in or out during a scroll. The hero is
+     100svh, so it doesn't actually change size then; only react when it really does (rotation,
+     window resize), and then rescale the existing bubbles instead of scattering new ones. */
+  let rT;
+  new ResizeObserver(() => {
+    clearTimeout(rT);
+    rT = setTimeout(() => {
+      const oldW = W, oldH = H;
+      if (hero.clientWidth === oldW && hero.clientHeight === oldH) return;
+      resize();
+      const sx = W / oldW, sy = H / oldH;
+      bubbles.forEach((b) => { b.x *= sx; b.y *= sy; });
+      if (reduceMotion) bubbles.forEach(drawBubble);
+    }, 150);
+  }).observe(hero);
 
   /* hero product stack parallax */
   const stack = $("#heroStack");
@@ -208,6 +222,24 @@
     if (canHover) b.addEventListener("mouseenter", act);
     b.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act(); } });
   });
+  /* The descriptions differ in length, so as the list rotates its height would change and push
+     the rest of the page up and down mid-scroll. Reserve the height of its tallest state. */
+  const bList = $("#benefits");
+  let bListW = 0;
+  const lockBenefitsHeight = (force) => {
+    if (!force && bList.clientWidth === bListW) return;
+    bListW = bList.clientWidth;
+    bList.style.minHeight = "";
+    bList.classList.add("is-measuring");
+    const cur = bIndex; let max = 0;
+    benefits.forEach((_, i) => { setBenefit(i); max = Math.max(max, bList.offsetHeight); });
+    setBenefit(cur);
+    bList.offsetHeight; /* apply the restored state before transitions come back */
+    bList.classList.remove("is-measuring");
+    bList.style.minHeight = max + "px";
+  };
+  new ResizeObserver(() => lockBenefitsHeight()).observe(bList);
+  document.fonts?.ready.then(() => lockBenefitsHeight(true));
   new IntersectionObserver(([e]) => {
     clearInterval(bTimer);
     if (e.isIntersecting && !bTouched && !reduceMotion) bTimer = setInterval(() => setBenefit((bIndex + 1) % benefits.length), 3200);
@@ -283,14 +315,21 @@
     else return;
     e.preventDefault();
   });
-  /* a little "hint" wiggle the first time it scrolls into view */
+  /* a little "hint" wiggle the first time it scrolls into view — dropped the moment someone
+     touches the slider, so it never yanks the handle back out from under their finger */
+  let wiggleT, touched = false;
+  const wiggleParts = () => cmp.querySelectorAll(".compare__side--new, .compare__handle");
+  const stopWiggle = () => { touched = true; clearTimeout(wiggleT); wiggleParts().forEach((el) => { el.style.transition = ""; }); };
+  cmp.addEventListener("pointerdown", stopWiggle, { capture: true });
+  handle.addEventListener("keydown", stopWiggle, { capture: true });
   new IntersectionObserver(([e], o) => {
     if (!e.isIntersecting || reduceMotion) return;
     o.disconnect();
+    if (touched) return;
     const seq = [50, 34, 66, 50]; let k = 0;
-    cmp.querySelectorAll(".compare__side--new, .compare__handle").forEach((el) => { el.style.transition = "clip-path .6s, left .6s, right .6s"; });
-    const step = () => { setPos(seq[k++]); if (k < seq.length) setTimeout(step, 650); else setTimeout(() => cmp.querySelectorAll(".compare__side--new, .compare__handle").forEach((el) => { el.style.transition = ""; }), 700); };
-    setTimeout(step, 400);
+    wiggleParts().forEach((el) => { el.style.transition = "clip-path .6s, left .6s, right .6s"; });
+    const step = () => { setPos(seq[k++]); wiggleT = setTimeout(k < seq.length ? step : stopWiggle, k < seq.length ? 650 : 700); };
+    wiggleT = setTimeout(step, 400);
   }, { threshold: 0.6 }).observe(cmp);
 
   /* ---------------- Products ---------------- */
