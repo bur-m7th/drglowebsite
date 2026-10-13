@@ -53,7 +53,16 @@ const SOCIAL = [
   "https://www.youtube.com/@drglo", "https://www.snapchat.com/add/drglo", "https://www.linkedin.com/company/drglo"
 ];
 
-function jsonLd(lang) {
+/* FAQ pairs, read from the visible page so the structured data can never drift from it. */
+const plain = (h) => h.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+function faqPairs(lang, html) {
+  const sec = html.match(/<section class="section faq"[\s\S]*?<\/section>/)[0];
+  return [...sec.matchAll(/<summary data-i18n="([^"]+)">([\s\S]*?)<\/summary>\s*<p data-i18n="([^"]+)">([\s\S]*?)<\/p>/g)]
+    .map(([, qk, q, ak, a]) => lang === "ar" ? [AR[qk] ?? q, AR[ak] ?? a] : [q, a])
+    .map(([q, a]) => ({ "@type": "Question", name: plain(q), acceptedAnswer: { "@type": "Answer", text: plain(a) } }));
+}
+
+function jsonLd(lang, html) {
   const url = lang === "ar" ? SITE + "ar/" : SITE;
   const org = {
     "@type": "Organization",
@@ -88,11 +97,12 @@ function jsonLd(lang) {
     inLanguage: lang, isPartOf: { "@id": SITE + "#website" }, about: { "@id": SITE + "#organization" },
     primaryImageOfPage: SITE + "assets/img/og-image.jpg"
   };
-  return JSON.stringify({ "@context": "https://schema.org", "@graph": [org, site, page] }, null, 2)
+  const faq = { "@type": "FAQPage", "@id": url + "#faq", inLanguage: lang, isPartOf: { "@id": url + "#webpage" }, mainEntity: faqPairs(lang, html) };
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": [org, site, page, faq] }, null, 2)
     .replace(/</g, "\\u003c");
 }
 
-function seoBlock(lang) {
+function seoBlock(lang, html) {
   const m = META[lang], url = lang === "ar" ? SITE + "ar/" : SITE, r = lang === "ar" ? "../" : "";
   const img = SITE + "assets/img/og-image.jpg";
   return `<!-- seo:start -->
@@ -123,7 +133,7 @@ function seoBlock(lang) {
   <link rel="apple-touch-icon" sizes="180x180" href="${r}assets/img/apple-touch-icon.png">
   <link rel="manifest" href="${r}site.webmanifest">
   <script type="application/ld+json">
-${jsonLd(lang)}
+${jsonLd(lang, html)}
   </script>
   <!-- seo:end -->`;
 }
@@ -138,14 +148,14 @@ const products = (lang, imgBase) =>
 
 /* ---- English page (in place) ---- */
 let en = read("index.html");
-en = replaceBlock(en, "seo", seoBlock("en"));
+en = replaceBlock(en, "seo", seoBlock("en", en));
 en = replaceBlock(en, "products", products("en", "assets/img/products/"));
 write("index.html", en);
 
 /* ---- Arabic page ---- */
 let ar = en;
 ar = ar.replace('<html lang="en" dir="ltr">', '<html lang="ar" dir="rtl" data-root="../">');
-ar = replaceBlock(ar, "seo", seoBlock("ar"));
+ar = replaceBlock(ar, "seo", seoBlock("ar", en));
 ar = replaceBlock(ar, "products", products("ar", "../assets/img/products/"));
 const missing = new Set();
 ar = ar.replace(/(<([a-z0-9]+)\b[^>]*\bdata-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>)/g, (all, open, tag, key, inner, close) => {
