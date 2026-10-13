@@ -472,9 +472,14 @@ html[lang="ar"] .quiz__result h3 { letter-spacing: 0; }
 .partners { padding: 24px 0 clamp(56px, 8vw, 96px); }
 .marquee--partners .marquee__track { gap: 16px; animation-duration: 50s; }
 .partner {
-  white-space: nowrap; padding: 16px 28px; border-radius: 16px; background: #fff; border: 1px solid var(--line);
+  display: flex; align-items: center; height: 64px; flex: none;
+  white-space: nowrap; padding: 0 28px; border-radius: 16px; background: #fff; border: 1px solid var(--line);
   font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--navy-900);
 }
+/* Logos sit in the same 64px chip as the text names. Every logo gets the same height and
+   keeps its own aspect ratio, so the chips end up with naturally varied widths. */
+.partner--logo { padding: 0 20px; }
+.partner--logo img { display: block; height: 40px; width: auto; }
 
 /* ---------- Buy ---------- */
 .buy { padding-top: 0; }

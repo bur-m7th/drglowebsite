@@ -313,10 +313,24 @@ const MAP = {
   muharraqOutline: [[50.58, 26.255], [50.62, 26.29], [50.665, 26.28], [50.66, 26.245], [50.62, 26.235]]
 };
 
+/* Partner logos (official artwork, trimmed tight and sized for ~2x display). A plain string
+   still works as a text-only fallback. w/h are the file's intrinsic size
+   (only used to reserve space; CSS renders every logo at the same height). Order alternates
+   wide and compact marks so the marquee has an even rhythm. */
 const PARTNERS = [
-  "Danube", "Al Helli Supermarket", "AlSater Markets", "Tamimi Markets", "Mega Mart",
-  "Al Anwar Discount Center", "Hamza Center", "AlSalam", "Ali Centre", "Day to Day",
-  "Mazaya", "Al Muntazah Markets", "Al-A'raf Markets"
+  { name: "Danube", logo: "danube.svg", w: 374, h: 113 },
+  { name: "AlSater Markets", logo: "alsater.webp", w: 114, h: 112 },
+  { name: "Al Helli Supermarket", logo: "alhelli.webp", w: 626, h: 112 },
+  { name: "Day to Day", logo: "daytoday.webp", w: 113, h: 112 },
+  { name: "Tamimi Markets", logo: "tamimi.webp", w: 405, h: 112 },
+  { name: "Ali Centre", logo: "alicentre.webp", w: 101, h: 112 },
+  { name: "Mega Mart", logo: "megamart.webp", w: 338, h: 74 },
+  { name: "AlSalam", logo: "alsalam.webp", w: 161, h: 112 },
+  { name: "Al Anwar Discount Center", logo: "alanwar.webp", w: 376, h: 112 },
+  { name: "Al-A'raf Markets", logo: "alaraf.webp", w: 107, h: 112 },
+  { name: "Hamza Alaswad", logo: "hamza.webp", w: 428, h: 112 },
+  { name: "Mazaya", logo: "mazaya.webp", w: 211, h: 76 },
+  { name: "Al Muntazah Markets", logo: "almuntazah.webp", w: 213, h: 94 }
 ];
 
 /* Arabic translations. English lives in the HTML and is captured at runtime. */

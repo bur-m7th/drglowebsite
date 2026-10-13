@@ -15,7 +15,10 @@
 
   /* ---------------- Marquees (duplicate for a seamless loop) ---------------- */
   const partnerTrack = $("#partnerTrack");
-  partnerTrack.innerHTML = PARTNERS.map((p) => `<span class="partner">${p}</span>`).join("");
+  partnerTrack.innerHTML = PARTNERS.map((p) => typeof p === "string"
+    ? `<span class="partner">${p}</span>`
+    : `<span class="partner partner--logo"><img src="${ROOT}assets/img/partners/${p.logo}" alt="${p.name}" width="${p.w}" height="${p.h}" loading="lazy" decoding="async"></span>`
+  ).join("");
   $$(".marquee__track").forEach((t) => { t.innerHTML += t.innerHTML; });
   $$(".marquee__track").forEach((t) => {
     [...t.children].slice(t.children.length / 2).forEach((c) => c.setAttribute("aria-hidden", "true"));
